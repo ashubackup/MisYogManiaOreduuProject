@@ -13,8 +13,7 @@ public interface TblSubscriptionRepo extends JpaRepository<TblSubscription, Inte
 	Integer getTblSubBaseCount();
 	
 	// Active Count with nextBilledDate 0
-	@Query(value="SELECT COUNT(ani) FROM tbl_subscription WHERE DATE(sub_date_time)<DATE(SUBDATE(NOW(),0)) AND SubscriptionStatus='ACTIVE' AND next_billed_date IS NOT NULL\r\n"
-			+ "", nativeQuery = true )
+	@Query(value="SELECT COUNT(ani) FROM tbl_subscription WHERE DATE(next_billed_date)>=DATE(SUBDATE(NOW(),1)) AND SubscriptionStatus='ACTIVE' ", nativeQuery = true )
 	Integer getTblSubActiveCount();
 	
 	//----------------tbl_billing_success-----------
