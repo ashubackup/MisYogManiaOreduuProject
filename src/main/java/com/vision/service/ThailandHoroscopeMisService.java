@@ -38,12 +38,12 @@ public class ThailandHoroscopeMisService {
 		if(dailyRenCount ==0)
 			dailyRenCount =0;
 		
-		Double dailySubRevenue = thailandRepo.dailySubRevenue(date);
-		if(dailySubRevenue == null)
-			dailySubRevenue =0.0;
-		Double dailyRenRevenue = thailandRepo.dailyRenRevenue(date);
-		if(dailyRenRevenue == null)
-			dailyRenRevenue =0.0;
+		//Double dailySubRevenue = thailandRepo.dailySubRevenue(date);
+		Double dailySubRevenue = dailySubCount*5.0;
+		
+		//Double dailyRenRevenue = thailandRepo.dailyRenRevenue(date);
+		Double dailyRenRevenue = dailyRenCount*5.0;
+		
 		
 		Double totalRevenue = dailySubRevenue+dailyRenRevenue;
 		totalRevenue=totalRevenue==null?0.0:totalRevenue;

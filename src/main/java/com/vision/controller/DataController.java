@@ -24,8 +24,8 @@ import com.vision.service.TselMoSmsVisiontrekMisService;
 import com.vision.service.YogaOreduOmanMisService;
 import com.vision.service.ZainIraqToonflixMisService;
 
-@RestController
-//@Component
+//@RestController
+@Component
 public class DataController 
 {
 	
@@ -171,8 +171,8 @@ public class DataController
 	}
 	
 	
-	@GetMapping("/horoscope")
-	//@Scheduled(cron = "0 25 8 * * *",zone="IST")
+	//@GetMapping("/horoscope")
+	@Scheduled(cron = "0 25 8 * * *",zone="IST")
 	public void thailandHoroscopeMisData()
 	{
 		System.out.println("======thailandHoroscopeMisData saving start==========");

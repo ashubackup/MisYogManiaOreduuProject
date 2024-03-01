@@ -19,11 +19,11 @@ public interface ThailandRepository extends JpaRepository<TblSubscription, Integ
 			+ "",nativeQuery = true)
 	Integer activeCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(ani) FROM indexapp_billing_sucess WHERE DATE(DATETIME)=DATE(SUBDATE(NOW(),:date)) AND type_event='sub'\r\n"
+	@Query(value="SELECT COUNT(DISTINCT ani) FROM indexapp_billing_sucess WHERE DATE(DATETIME)=DATE(SUBDATE(NOW(),:date)) AND type_event='sub'\r\n"
 			+ "",nativeQuery = true)
 	Integer dailySubCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(ani) FROM indexapp_billing_sucess WHERE DATE(DATETIME)=DATE(SUBDATE(NOW(),:date)) AND type_event='ren'\r\n"
+	@Query(value="SELECT COUNT(DISTINCT ani) FROM indexapp_billing_sucess WHERE DATE(DATETIME) = DATE(SUBDATE(NOW(), :date)) AND type_event = 'ren'\r\n"
 			+ "",nativeQuery = true)
 	Integer dailyRenCount(@Param("date") int date);
 	
