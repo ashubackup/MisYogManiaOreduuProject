@@ -99,13 +99,13 @@ public class HtwoNSerialeoneMisService {
 //		String subscriptionRevenue,String renewalsRevenue, String totalRevenue
 	    
 		// PackRequest entity data set 
-		PackRequest pack = service.setDailyPackRequest("Daily", "Daily", String.valueOf(dailyPrice), "Serialeone", minusOneDay,
+		PackRequest pack = service.setDailyPackRequest("Daily", "Serialeone", String.valueOf(dailyPrice), "Serialeone", minusOneDay,
 				String.valueOf(dailySubCount), 
 				String.valueOf(dailyRenCount), String.valueOf(unsubCount), String.valueOf(dailySubRevenue), 
 				String.valueOf(dailyRenRevenue), String.valueOf(totalDailyRevenue));
 		
 		// PackRequest entity data set 
-		PackRequest weeklyPack = service.setDailyPackRequest("Weekly", "Weekly", String.valueOf(weeklyPrice), "Serialeone", minusOneDay,
+		PackRequest weeklyPack = service.setDailyPackRequest("Weekly", "Serialeone", String.valueOf(weeklyPrice), "Serialeone", minusOneDay,
 						String.valueOf(weeklySubCount), 
 						String.valueOf(weeklyRenCount), String.valueOf(unsubCount), String.valueOf(dailySubRevenue), 
 						String.valueOf(weeklyRenRevenue), String.valueOf(totalWeeklyRevenue));
@@ -125,19 +125,11 @@ public class HtwoNSerialeoneMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("Serialeone", "KidzMania", "1",
 				minusOneDay, String.valueOf(dailySubCount+weeklySubCount), String.valueOf(dailyRenCount+weeklyRenCount),
 				String.valueOf(dailySubRevenue+weeklySubRevenue),String.valueOf(dailyRenRevenue+weeklyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,unsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
 		
-		
-//		public static MainServiceRequest setMainServiceInfo
-//		(String service,String misDate,String totalBase, String totalActiveBase,
-//		String subscriptions,String renewals,
-//		String unsubscriptions,String subscriptionRevenue,String renewalsRevenue,
-//		String totalRevenue, String usdRevenue, String callbackcount,
-//		String SubFailed, String revenueShare, String fame,
-//		List<SubServiceRequest> subService )
 		
 		// MainServiceRequest
 		MainServiceRequest mainService = service.setMainServiceRequest("Serialeone", minusOneDay, 
@@ -154,6 +146,8 @@ public class HtwoNSerialeoneMisService {
 				"0",
 				"0",
 				"0",
+				"Orange",
+				"SieraLeone",
 				subList);
 		
 		System.out.println(mainService);

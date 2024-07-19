@@ -16,8 +16,7 @@ public interface JanguKidsRepository extends JpaRepository<TblSubscription, Inte
 			+ "",nativeQuery = true)
 	Integer baseCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(next_billed_date)>=DATE(SUBDATE(NOW(),:date))\r\n"
-			+ "",nativeQuery = true)
+	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(next_billed_date) IS NOT NULL;",nativeQuery = true)
 	Integer activeCount(@Param("date") int date);
 	
 	

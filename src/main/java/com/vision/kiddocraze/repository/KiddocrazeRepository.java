@@ -14,7 +14,7 @@ public interface KiddocrazeRepository extends JpaRepository<TblSubscription, Int
 			+ "",nativeQuery = true)
 	Integer baseCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(SUBDATE)=DATE(SUBDATE(NOW(),:date))",nativeQuery = true)
+	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(nextBilledDateTime) IS NOT NULL;",nativeQuery = true)
 	Integer activeCount(@Param("date") int date);
 	
 	@Query(value="SELECT COUNT(msisdn) FROM tbl_billing_success WHERE DATE(billingDateTime)=DATE(SUBDATE(NOW(),:date)) AND type_event='sub'",nativeQuery = true)

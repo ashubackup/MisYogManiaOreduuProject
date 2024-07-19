@@ -25,9 +25,13 @@ public class EthiopiaMisService {
 	public void saveEthopiaMis()
 	{
 		int date = 1;
-//		while(date>=3)
+//		while(date>=1)
 //		{
+		
 			
+		LocalDate currentDateTime = LocalDate.now();
+	    String minusOneDay = currentDateTime.minusDays(date).toString();
+	    System.out.println("date is "+ minusOneDay);
 		
 		Double usd = service.getUsdValue("ETB");
 			
@@ -36,6 +40,9 @@ public class EthiopiaMisService {
 		totalBaseCount=totalBaseCount==null?0:totalBaseCount;
 		Integer totalActiveCount = ethoRepo.activeCount(date-1);
 		totalActiveCount=totalActiveCount==null?0:totalActiveCount;
+		
+		Integer baseCountOfGameStation = ethoRepo.baseCountByService(date, "game-station");
+		Integer activeCountOfGameStation = ethoRepo.activeCountByService("game-station");
 		
 		// there is no sub and ren type in db
 		// all ren so sub is 0
@@ -55,9 +62,8 @@ public class EthiopiaMisService {
 			dailyRenRevenue =0.0;
 		
 		
-		System.out.println("daily sub rev "+ dailySubRevenue);
-		Double totalRevenue = dailySubRevenue+dailyRenRevenue;
-		totalRevenue=totalRevenue==null?0.0:totalRevenue;
+		Double gameTotalRevenue = dailySubRevenue+dailyRenRevenue;
+		gameTotalRevenue=gameTotalRevenue==null?0.0:gameTotalRevenue;
 		
 		Integer dailyUnsubCount = ethoRepo.unsubCount(date);
 		if(dailyUnsubCount == null)
@@ -67,62 +73,104 @@ public class EthiopiaMisService {
 		if(price == null)
 			price = 2.0;
 		
-	
-		System.out.println("Get Usd : " + usd );
-		System.out.println("total rev "+ totalRevenue);
+		
+		
+		
+		//------------esports-----
+		
+		
+		Integer baseCountOfEsportStation = ethoRepo.baseCountByService(date, "esport");
+		Integer activeCountOfEsportStation = ethoRepo.activeCountByService("esport");
+		
+		Integer esportDailySubCount = ethoRepo.esportDailySubCount(date);
+		if(esportDailySubCount ==null)
+			esportDailySubCount =0;
+		
+		Integer esportDailyRenCount = ethoRepo.esportDailyRenCount(date);
+		if(esportDailyRenCount ==null)
+			esportDailyRenCount =0;
+		
+		Double esportDailySubRevenue = ethoRepo.esportDailySubRevenue(date);
+		if(esportDailySubRevenue ==null)
+			esportDailySubRevenue =0.0;
+		Double esportDailyRenRevenue = ethoRepo.esportDailyRenRevenue(date);
+		if(esportDailyRenRevenue == null)
+			esportDailyRenRevenue =0.0;
+		
+		Integer esportUnsubCount = ethoRepo.esportUnsubCount(date);
+		if(esportUnsubCount == null)
+			esportUnsubCount = 0;
+		
+		Double esportTotalRevenue = esportDailySubRevenue+esportDailyRenRevenue;
+		esportTotalRevenue=esportTotalRevenue==null?0.0:esportTotalRevenue;
+		
+		
+		
+		Double totalRevenue = dailySubRevenue+dailyRenRevenue+esportDailySubRevenue+esportDailyRenRevenue;
+		totalRevenue=totalRevenue==null?0.0:totalRevenue;
+
 		Double usdRevenue = totalRevenue * usd;
 		
-		System.out.println("Usd Revenue: " + usdRevenue);
 		
 		//1
-		LocalDate currentDateTime = LocalDate.now();
-	    String minusOneDay = currentDateTime.minusDays(date).toString();
-	    System.out.println("mis date ====" + minusOneDay);
+		
 	    
-		PackRequest pack = service.setDailyPackRequest("Daily", "Daily", String.valueOf(price), "EthopiaGames", minusOneDay,
+		PackRequest pack = service.setDailyPackRequest("Daily", "EthopiaGames", String.valueOf(price), "EthopiaGames", minusOneDay,
 				String.valueOf(dailySubCount), 
 				String.valueOf(dailyRenCount), String.valueOf(dailyUnsubCount), String.valueOf(dailySubRevenue), 
-				String.valueOf(dailyRenRevenue), String.valueOf(totalRevenue));
+				String.valueOf(dailyRenRevenue), String.valueOf(gameTotalRevenue));
+		
+		PackRequest esportPack = service.setDailyPackRequest("Daily", "EthopiaGames", String.valueOf(price), "EthopiaGames", minusOneDay,
+				String.valueOf(esportDailySubCount), 
+				String.valueOf(esportDailyRenCount), String.valueOf(esportUnsubCount), String.valueOf(esportDailySubRevenue), 
+				String.valueOf(esportDailyRenRevenue), String.valueOf(esportTotalRevenue));
 		
 	
 		List<PackRequest> packList = new ArrayList<>();
 		packList.add(pack);
+		packList.add(esportPack);
 		
 		
 		// SubServiceRequest 
 		SubServiceRequest subService = service.setDailySubServiceRequest("EthopiaGames", "GameStation", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(gameTotalRevenue),baseCountOfGameStation,activeCountOfGameStation,dailyUnsubCount, packList);
+				
+		SubServiceRequest subServiceEsport = service.setDailySubServiceRequest("EthopiaGames", "Esport", "1",
+				minusOneDay, String.valueOf(esportDailySubCount), String.valueOf(esportDailyRenCount),
+				String.valueOf(esportDailySubRevenue),String.valueOf(esportDailyRenRevenue),
+				String.valueOf(esportTotalRevenue),baseCountOfEsportStation,activeCountOfEsportStation,esportUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
+		subList.add(subServiceEsport);
 		
 	
 		MainServiceRequest mainService = service.setMainServiceRequest("EthopiaGames", minusOneDay, 
 				String.valueOf(totalBaseCount), 
 				String.valueOf(totalActiveCount),
-				String.valueOf(dailySubCount), 
-				String.valueOf(dailyRenCount),
-				String.valueOf(dailyUnsubCount), 
-				String.valueOf(dailySubRevenue), 
-				String.valueOf(dailyRenRevenue),
+				String.valueOf(dailySubCount+esportDailySubCount), 
+				String.valueOf(dailyRenCount+esportDailyRenCount),
+				String.valueOf(dailyUnsubCount+esportUnsubCount), 
+				String.valueOf(dailySubRevenue+esportDailySubRevenue), 
+				String.valueOf(dailyRenRevenue+esportDailyRenRevenue),
 				String.valueOf(totalRevenue), 
 				String.valueOf(usdRevenue),
 				"0",
 				"0",
 				"0",
 				"0",
+				"Ethio",
+				"Ethopai",
 				subList);
 		
-		System.out.println(mainService);
-		
-		
-		
+
 		System.out.println("=======Data save api calling now========");
 		UtilityService.saveServiceApi(mainService);
-//		date--;
-//		
-//		}
+		//date--;
+		//break;
+		
+		//}
 	}
 }

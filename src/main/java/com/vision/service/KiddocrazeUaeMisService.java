@@ -22,7 +22,7 @@ public class KiddocrazeUaeMisService {
 	@Autowired
 	private UtilityService service;
 	
-	public void saveKiddocrazeUaeMis()
+	public void saveKiddocrazeUaeMis(String serviceName)
 	{
 		int date = 1;
 		
@@ -32,29 +32,29 @@ public class KiddocrazeUaeMisService {
 //		{
 			
 		System.out.println("Date value is "+ date);
-		Integer totalBaseCount = kiddoUae.baseCount(date-1);
+		Integer totalBaseCount = kiddoUae.baseCount(date-1,serviceName);
 		totalBaseCount=totalBaseCount==null?0:totalBaseCount;
-		Integer totalActiveCount = kiddoUae.activeCount(date-1);
+		Integer totalActiveCount = kiddoUae.activeCount(serviceName);
 		totalActiveCount=totalActiveCount==null?0:totalActiveCount;
 		
-		Integer dailySubCount = kiddoUae.dailySubCount(date);
+		Integer dailySubCount = kiddoUae.dailySubCount(date,serviceName);
 		if(dailySubCount ==null)
 			dailySubCount =0;
-		Integer dailyRenCount = kiddoUae.dailyRenCount(date);
+		Integer dailyRenCount = kiddoUae.dailyRenCount(date,serviceName);
 		if(dailyRenCount ==0)
 			dailyRenCount =0;
 		
-		Double dailySubRevenue = kiddoUae.dailySubRevenue(date);
+		Double dailySubRevenue = kiddoUae.dailySubRevenue(date,serviceName);
 		if(dailySubRevenue == null)
 			dailySubRevenue =0.0;
-		Double dailyRenRevenue = kiddoUae.dailyRenRevenue(date);
+		Double dailyRenRevenue = kiddoUae.dailyRenRevenue(date,serviceName);
 		if(dailyRenRevenue == null)
 			dailyRenRevenue =0.0;
 		
 		Double totalRevenue = dailySubRevenue+dailyRenRevenue;
 		totalRevenue=totalRevenue==null?0.0:totalRevenue;
 		
-		Integer dailyUnsubCount = kiddoUae.unsubCount(date);
+		Integer dailyUnsubCount = kiddoUae.unsubCount(date,serviceName);
 		if(dailyUnsubCount == null)
 			dailyUnsubCount = 0;
 		
@@ -76,7 +76,7 @@ public class KiddocrazeUaeMisService {
 	    String minusOneDay = currentDateTime.minusDays(date).toString();
 	    System.out.println("mis date ====" + minusOneDay);
 	    
-		PackRequest pack = service.setDailyPackRequest("Weekly", "Weekly", String.valueOf(price), "KiddocrazeUae", minusOneDay,
+		PackRequest pack = service.setDailyPackRequest("Weekly", "Weekly", String.valueOf(price), serviceName+"Uae", minusOneDay,
 				String.valueOf(dailySubCount), 
 				String.valueOf(dailyRenCount), String.valueOf(dailyUnsubCount), String.valueOf(dailySubRevenue), 
 				String.valueOf(dailyRenRevenue), String.valueOf(totalRevenue));
@@ -87,16 +87,16 @@ public class KiddocrazeUaeMisService {
 		
 		
 		// SubServiceRequest 
-		SubServiceRequest subService = service.setDailySubServiceRequest("kiddocrazeUae", "KiddocrazeUae", "1",
+		SubServiceRequest subService = service.setDailySubServiceRequest(serviceName+"Uae", serviceName+"Uae", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
 		
 	
-		MainServiceRequest mainService = service.setMainServiceRequest("KiddocrazeUae", minusOneDay, 
+		MainServiceRequest mainService = service.setMainServiceRequest(serviceName+"Uae", minusOneDay, 
 				String.valueOf(totalBaseCount), 
 				String.valueOf(totalActiveCount),
 				String.valueOf(dailySubCount), 
@@ -110,6 +110,8 @@ public class KiddocrazeUaeMisService {
 				"0",
 				"0",
 				"0",
+				"Etisalat",
+				"UAE",
 				subList);
 		
 		System.out.println(mainService);
@@ -122,6 +124,4 @@ public class KiddocrazeUaeMisService {
 //		}
 		
 	}
-	
-
 }

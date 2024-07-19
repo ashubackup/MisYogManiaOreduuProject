@@ -15,15 +15,14 @@ public interface ThailandRepository extends JpaRepository<TblSubscription, Integ
 			+ "",nativeQuery = true)
 	Integer baseCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(msisdn) FROM indexapp_subscription WHERE DATE(sub_date_time)=DATE(SUBDATE(NOW(),:date))\r\n"
-			+ "",nativeQuery = true)
+	@Query(value="SELECT COUNT(msisdn) FROM indexapp_subscription WHERE DATE(last_billed_date) IS NOT NULL;",nativeQuery = true)
 	Integer activeCount(@Param("date") int date);
 	
 	@Query(value="SELECT COUNT(DISTINCT ani) FROM indexapp_billing_sucess WHERE DATE(DATETIME)=DATE(SUBDATE(NOW(),:date)) AND type_event='sub'\r\n"
 			+ "",nativeQuery = true)
 	Integer dailySubCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(DISTINCT ani) FROM indexapp_billing_sucess WHERE DATE(DATETIME) = DATE(SUBDATE(NOW(), :date)) AND type_event = 'ren'\r\n"
+	@Query(value="SELECT COUNT(msisdn) FROM tbl_req_sdp_logs WHERE DATE(TIMESTAMP)=DATE(SUBDATE(NOW(),:date)) AND description='Successful' AND ACTION='RENEWAL_TRANSACTION' ORDER BY TIMESTAMP DESC\r\n"
 			+ "",nativeQuery = true)
 	Integer dailyRenCount(@Param("date") int date);
 	

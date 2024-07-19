@@ -112,11 +112,11 @@ public class FitoffyAndKidsMisService
 	 
 	 	SubServiceRequest subServiceRequest = setDailySubServiceRequest("CellcSA", "Fitofyy", "1", minusOneDay,
 	 			String.valueOf(dailySubCount), String.valueOf(dailyRenCount), String.valueOf(dailySubRev),
-	 			String.valueOf(dailyRenewalRev), String.valueOf(totalRevenue), packRequestList);
+	 			String.valueOf(dailyRenewalRev), String.valueOf(totalRevenue),baseCount,activeBaseCount,unsubTotalCount, packRequestList);
 	 	
 	 	SubServiceRequest kidsSubServiceRequest = setDailySubServiceRequest("CellcSA", "Kidszonepro", "1", minusOneDay,
 	 			String.valueOf(kidsDailySubCount), String.valueOf(kidsDailyRenCount), String.valueOf(kidsDailySubRev),
-	 			String.valueOf(kidsDailyRenewalRev), String.valueOf(kidsTotalRevenue), packRequestList);
+	 			String.valueOf(kidsDailyRenewalRev), String.valueOf(kidsTotalRevenue),kidsBaseCount,kidsActiveBaseCount,kidsUnsubTotalCount, packRequestList);
 	 	
 	 	
 	 	//SubServiceRequest List
@@ -139,6 +139,8 @@ public class FitoffyAndKidsMisService
 				"0",
 				"0",
 				"0",
+				"Cellc",
+				"SouthAfrica",
 	 			subServiceRequestList);
 	 	
 	 
@@ -213,6 +215,7 @@ public class FitoffyAndKidsMisService
 	(String serviceName,String subServiceName,String status, String misDate,
 	String subscriptions,String renewals,
 	String subscriptionRevenue,String renewalsRevenue,String totalRevenue, 
+	Integer totalBase, Integer totalActiveBase, Integer unsubscription,
 	List<PackRequest> packList )
 	{
 		SubServiceRequest subServiceRequest = new SubServiceRequest();
@@ -226,6 +229,9 @@ public class FitoffyAndKidsMisService
 		subServiceRequest.setSubscriptionRevenue(subscriptionRevenue);
 		subServiceRequest.setRenewalRevenue(renewalsRevenue);
 		subServiceRequest.setTotalRevenue(totalRevenue);
+		subServiceRequest.setTotalBase(totalBase);	
+		subServiceRequest.setTotalActiveBase(totalActiveBase);	
+		subServiceRequest.setUnsubscription(unsubscription);	
 		subServiceRequest.setPack(packList);;
 
 		return subServiceRequest;
@@ -238,7 +244,7 @@ public class FitoffyAndKidsMisService
 	String subscriptions,String renewals,
 	String unsubscriptions,String subscriptionRevenue,String renewalsRevenue,
 	String totalRevenue, String usdRevenue,String callbackcount,
-	String SubFailed, String revenueShare, String fame,
+	String SubFailed, String revenueShare, String fame,String operator, String country,
 	List<SubServiceRequest> subService )
 	{
 		MainServiceRequest mainServiceRequest = new MainServiceRequest();
@@ -258,6 +264,8 @@ public class FitoffyAndKidsMisService
 		mainServiceRequest.setSubFailed(SubFailed);
 		mainServiceRequest.setRevenueShare(revenueShare);
 		mainServiceRequest.setFame(fame);
+		mainServiceRequest.setOperator(operator);
+		mainServiceRequest.setCountry(country);	
 		mainServiceRequest.setSubService(subService);
 		return mainServiceRequest;
 	} 

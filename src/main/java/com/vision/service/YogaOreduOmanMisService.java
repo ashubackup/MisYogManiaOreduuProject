@@ -57,27 +57,29 @@ public class YogaOreduOmanMisService {
 	    String minusOneDay = currentDateTime.minusDays(1).toString();
 	 	
 	 	// Set Daily 
-	 	PackRequest packDaily =  service.setDailyPackRequest("Daily", "YogaForU", String.valueOf(price), "Ooredoo", minusOneDay, String.valueOf(dailySubCount),  
+	 	PackRequest packDaily =  service.setDailyPackRequest("Daily", "YogaForYou", String.valueOf(price), "YogaForU", minusOneDay, String.valueOf(dailySubCount),  
 	 			String.valueOf(dailyRenCount),  String.valueOf(unSubCount), 
 	 			String.valueOf(subRevenue), String.valueOf(renRevenue), String.valueOf(totalRevenue));
 	 	
 	 	List<PackRequest> packRequestList = new ArrayList<>();
 	 	packRequestList.add(packDaily);
 	 	
-	 	SubServiceRequest subServiceRequest = service.setDailySubServiceRequest("Ooredoo", "YogaForU", "1", minusOneDay,
+	 	SubServiceRequest subServiceRequest = service.setDailySubServiceRequest("YogaForYou", "YogaForU", "1", minusOneDay,
 	 			String.valueOf(dailySubCount), String.valueOf(dailyRenCount), String.valueOf(subRevenue),
-	 			String.valueOf(renRevenue), String.valueOf(totalRevenue), packRequestList);
+	 			String.valueOf(renRevenue), String.valueOf(totalRevenue),baseCount,activeCount,unSubCount, packRequestList);
 	 	
 	 	List<SubServiceRequest> subServiceRequestList = new ArrayList<>();
 	 	subServiceRequestList.add(subServiceRequest);
 	 	
-	 	MainServiceRequest mainServiceRequest = service.setMainServiceRequest("Ooredoo", minusOneDay, String.valueOf(baseCount),String.valueOf(activeCount), 
+	 	MainServiceRequest mainServiceRequest = service.setMainServiceRequest("YogaForYou", minusOneDay, String.valueOf(baseCount),String.valueOf(activeCount), 
 	 			String.valueOf(dailySubCount), String.valueOf(dailyRenCount), String.valueOf(unSubCount), String.valueOf(subRevenue), String.valueOf(renRevenue),
 	 			String.valueOf(totalRevenue), String.valueOf(usdRevenue),
 	 			"0",
 				"0",
 				"0",
 				"0",
+				"Ooredoo",
+				"Kuwait",
 	 			subServiceRequestList);
 	 	
 	 // Calling the api

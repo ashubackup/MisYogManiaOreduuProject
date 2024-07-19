@@ -14,8 +14,7 @@ public interface TselMoSmsAndyRepo extends JpaRepository<TblSubscription, Intege
 	@Query(value="SELECT COUNT(MSISDN) FROM tbl_subscription WHERE DATE(SUB_DATE_TIME) < DATE(SUBDATE(NOW(),:date)) ",nativeQuery = true)
 	Integer baseCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(MSISDN) FROM tbl_subscription WHERE DATE(NEXT_REN_DATE)>=DATE(SUBDATE(NOW(),:date))"
-			+ "",nativeQuery = true)
+	@Query(value="SELECT COUNT(MSISDN) FROM tbl_renewal_success WHERE DATE(NEXT_REN_DATE) IS NOT NULL;",nativeQuery = true)
 	Integer activeCount(@Param("date") int date);
 	
 	@Query(value="SELECT COUNT(MSISDN) FROM tbl_renewal_success WHERE DATE(REN_DATE)=DATE(SUBDATE(NOW(),:date)) AND TYPE='SUB'\r\n"

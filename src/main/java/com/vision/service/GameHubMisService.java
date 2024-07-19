@@ -87,7 +87,7 @@ public class GameHubMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("GameHubKeniya", "GameHubKeniya", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
@@ -107,6 +107,8 @@ public class GameHubMisService {
 				"0",
 				"0",
 				"0",
+				"Safaricom",
+				"Kenya",
 				subList);
 		
 		System.out.println(mainService);

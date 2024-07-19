@@ -55,6 +55,9 @@ public class MainServiceRequest
 	
 	private String fame;
 	
+	private String operator;
+	private String country;
+	
 	//@NotNull
 	private List<SubServiceRequest> subService;
 	

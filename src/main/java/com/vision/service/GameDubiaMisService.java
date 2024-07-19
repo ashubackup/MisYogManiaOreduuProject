@@ -83,7 +83,7 @@ public class GameDubiaMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("Gameit_Dubai", "GameIT", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
@@ -103,6 +103,8 @@ public class GameDubiaMisService {
 				"0",
 				"0",
 				"0",
+				"Etisalat",
+				"UAE",
 				subList);
 		
 		System.out.println(mainService);

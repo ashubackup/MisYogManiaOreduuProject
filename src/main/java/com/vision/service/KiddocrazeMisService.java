@@ -85,7 +85,7 @@ public class KiddocrazeMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("Kiddocraze", "Kiddocraze", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
@@ -105,6 +105,8 @@ public class KiddocrazeMisService {
 				"0",
 				"0",
 				"0",
+				"Safaricom",
+				"Kenya",
 				subList);
 		
 		System.out.println(mainService);

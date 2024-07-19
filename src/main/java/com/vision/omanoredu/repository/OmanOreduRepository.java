@@ -17,8 +17,7 @@ public interface OmanOreduRepository extends JpaRepository<TblSubscription, Inte
 			+ "",nativeQuery = true)
 	Integer baseCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(nextBilledDateTime)>=DATE(SUBDATE(NOW(),:date))\r\n"
-			+ "",nativeQuery = true)
+	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(nextBilledDateTime) IS NOT NULL;",nativeQuery = true)
 	Integer activeCount(@Param("date") int date);
 	
 	@Query(value="SELECT COUNT(msisdn) FROM tbl_billing_success WHERE DATE(billedDateTime)=DATE(SUBDATE(NOW(),:date)) AND typeEvent='sub' AND packType='DAILY'"

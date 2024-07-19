@@ -99,12 +99,13 @@ public class OmanOreduMisService {
 	    String minusOneDay = currentDateTime.minusDays(date).toString();
 	    System.out.println("mis date ====" + minusOneDay);
 	    
-		PackRequest pack = service.setDailyPackRequest("Daily", "Daily", String.valueOf(dailyPrice), "OmanOredu", minusOneDay,
+	    //OmanOredu
+		PackRequest pack = service.setDailyPackRequest("Daily", "BabbuTv", String.valueOf(dailyPrice), "BabbuTv", minusOneDay,
 				String.valueOf(dailySubCount), 
 				String.valueOf(dailyRenCount), String.valueOf(dailyUnsubCount), String.valueOf(dailySubRevenue), 
 				String.valueOf(dailyRenRevenue), String.valueOf(totalDailyRevenue));
 		
-		PackRequest weeklyPack = service.setDailyPackRequest("Weekly", "Weekly", String.valueOf(weeklyPrice), "OmanOredu", minusOneDay,
+		PackRequest weeklyPack = service.setDailyPackRequest("Weekly", "BabbuTv", String.valueOf(weeklyPrice), "BabbuTv", minusOneDay,
 				String.valueOf(weeklySubCount), 
 				String.valueOf(weeklyRenCount), String.valueOf(weeklyUnsubCount), String.valueOf(weeklySubRevenue), 
 				String.valueOf(weeklyRenRevenue), String.valueOf(totalWeeklyRevenue));
@@ -116,16 +117,16 @@ public class OmanOreduMisService {
 		
 		
 		// SubServiceRequest 
-		SubServiceRequest subService = service.setDailySubServiceRequest("OmanOredu", "BabbuTv", "1",
+		SubServiceRequest subService = service.setDailySubServiceRequest("BabbuTv", "BabbuTv", "1",
 				minusOneDay, String.valueOf(dailySubCount+weeklySubCount), String.valueOf(dailyRenCount+weeklyRenCount),
 				String.valueOf(dailySubRevenue+weeklySubRevenue),String.valueOf(dailyRenRevenue+weeklyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
 		
 	
-		MainServiceRequest mainService = service.setMainServiceRequest("OmanOredu", minusOneDay, 
+		MainServiceRequest mainService = service.setMainServiceRequest("BabbuTv", minusOneDay, 
 				String.valueOf(totalBaseCount), 
 				String.valueOf(totalActiveCount),
 				String.valueOf(dailySubCount+weeklySubCount), 
@@ -139,6 +140,8 @@ public class OmanOreduMisService {
 				"0",
 				"0",
 				"0",
+				"Ooredoo",
+				"Oman",
 				subList);
 		
 		System.out.println(mainService);

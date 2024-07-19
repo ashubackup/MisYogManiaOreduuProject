@@ -65,7 +65,7 @@ public class TselMoSmsVisiontrekMisService {
 	    String minusOneDay = currentDateTime.minusDays(date).toString();
 	    System.out.println("mis date ====" + minusOneDay);
 	    
-		PackRequest pack = service.setDailyPackRequest("Daily", "Daily", String.valueOf(price), "Tsel", minusOneDay,
+		PackRequest pack = service.setDailyPackRequest("Daily", "Tsel", String.valueOf(price), "Tsel", minusOneDay,
 				String.valueOf(dailySubCount), 
 				String.valueOf(dailyRenCount), String.valueOf(dailyUnsubCount), String.valueOf(dailySubRevenue), 
 				String.valueOf(dailyRenRevenue), String.valueOf(totalRevenue));
@@ -79,7 +79,7 @@ public class TselMoSmsVisiontrekMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("Tsel", "Indoplayzone", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
@@ -99,6 +99,8 @@ public class TselMoSmsVisiontrekMisService {
 				"0",
 				"0",
 				"0",
+				"Tsel",
+				"Indonesia",
 				subList);
 		
 		System.out.println(mainService);

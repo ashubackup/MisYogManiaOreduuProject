@@ -42,6 +42,12 @@ public class SubServiceRequest
 	
 	//@NotEmpty
 	private String totalRevenue;
+	
+	private Integer totalBase;
+	
+	private Integer totalActiveBase;
+	
+	private Integer unsubscription;
 		
 	//@NotNull
 	private List<PackRequest> pack;

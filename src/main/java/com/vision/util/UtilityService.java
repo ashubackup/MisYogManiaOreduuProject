@@ -50,6 +50,7 @@ public class UtilityService
 	(String serviceName,String subServiceName,String status, String misDate,
 	String subscriptions,String renewals,
 	String subscriptionRevenue,String renewalsRevenue,String totalRevenue, 
+	Integer totalBase, Integer totalActiveBase, Integer unsubscription,
 	List<PackRequest> packList )
 	{
 		SubServiceRequest subServiceRequest = new SubServiceRequest();
@@ -63,6 +64,9 @@ public class UtilityService
 		subServiceRequest.setSubscriptionRevenue(subscriptionRevenue);
 		subServiceRequest.setRenewalRevenue(renewalsRevenue);
 		subServiceRequest.setTotalRevenue(totalRevenue);
+		subServiceRequest.setTotalBase(totalBase);	
+		subServiceRequest.setTotalActiveBase(totalActiveBase);	
+		subServiceRequest.setUnsubscription(unsubscription);
 		subServiceRequest.setPack(packList);;
 		
 		return subServiceRequest;
@@ -75,7 +79,7 @@ public class UtilityService
 	String subscriptions,String renewals,
 	String unsubscriptions,String subscriptionRevenue,String renewalsRevenue,
 	String totalRevenue, String usdRevenue,String callbackcount,
-	String SubFailed, String revenueShare, String fame,
+	String SubFailed, String revenueShare, String fame,String operator, String country,
 	List<SubServiceRequest> subService )
 	{
 		MainServiceRequest mainServiceRequest = new MainServiceRequest();
@@ -95,6 +99,8 @@ public class UtilityService
 		mainServiceRequest.setSubFailed(SubFailed);
 		mainServiceRequest.setRevenueShare(revenueShare);
 		mainServiceRequest.setFame(fame);
+		mainServiceRequest.setOperator(operator);	
+		mainServiceRequest.setCountry(country);	
 		mainServiceRequest.setSubService(subService);
 		return mainServiceRequest;
 	} 

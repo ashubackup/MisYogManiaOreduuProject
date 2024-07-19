@@ -86,7 +86,7 @@ public class ZainIraqToonflixMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("ToonflixIq", "ToonflixIq", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
@@ -106,6 +106,8 @@ public class ZainIraqToonflixMisService {
 				"0",
 				"0",
 				"0",
+				"",
+				"Iraq",
 				subList);
 		
 		System.out.println(mainService);

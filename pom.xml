@@ -8,7 +8,7 @@
 		<version>2.7.17</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<groupId>com.vision</groupId>
 	<artifactId>MisYogMania</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -57,7 +57,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>MisYogManiaOreduuProject</finalName>
+		<finalName>MisDataCollectorProjectTwo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

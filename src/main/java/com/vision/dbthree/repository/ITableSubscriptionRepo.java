@@ -13,7 +13,7 @@ public interface ITableSubscriptionRepo extends JpaRepository<TableSubscription,
 				+ "", nativeQuery = true )
 		Integer getBaseCount();
 		
-		@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(subDateTime)<DATE(SUBDATE(NOW(),1)) AND DATE(nextBilledDateTime)>=DATE(SUBDATE(NOW(),1))", nativeQuery = true )
+		@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(subDateTime)<DATE(SUBDATE(NOW(),1)) AND DATE(nextBilledDateTime) IS NOT NULL;", nativeQuery = true )
 		Integer getActiveCount();
 		
 		//----------------tbl_billing_success-----------

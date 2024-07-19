@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.vision.dbone.entity.TblSubscription;
 
-
 public interface TblSubscriptionRepo extends JpaRepository<TblSubscription, Integer>
 {
 	// Base Count 0
@@ -13,7 +12,7 @@ public interface TblSubscriptionRepo extends JpaRepository<TblSubscription, Inte
 	Integer getTblSubBaseCount();
 	
 	// Active Count with nextBilledDate 0
-	@Query(value="SELECT COUNT(ani) FROM tbl_subscription WHERE DATE(next_billed_date)>=DATE(SUBDATE(NOW(),1)) AND SubscriptionStatus='ACTIVE' ", nativeQuery = true )
+	@Query(value="SELECT COUNT(ani) FROM tbl_subscription WHERE DATE(next_billed_date) IS NOT NULL;", nativeQuery = true )
 	Integer getTblSubActiveCount();
 	
 	//----------------tbl_billing_success-----------

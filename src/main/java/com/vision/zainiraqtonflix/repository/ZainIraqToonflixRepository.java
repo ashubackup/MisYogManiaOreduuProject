@@ -18,8 +18,7 @@ public interface ZainIraqToonflixRepository extends JpaRepository<TblSubscriptio
 			+ "",nativeQuery = true)
 	Integer baseCount(@Param("date") int date);
 	
-	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(nextBillingDate)>=DATE(SUBDATE(NOW(),:date))\r\n"
-			+ "",nativeQuery = true)
+	@Query(value="SELECT COUNT(msisdn) FROM tbl_subscription WHERE DATE(nextBillingDate) IS NOT NULL;",nativeQuery = true)
 	Integer activeCount(@Param("date") int date);
 	
 	@Query(value="SELECT COUNT(msisdn) FROM tbl_billing_success WHERE DATE(billingDateTime)=DATE(SUBDATE(NOW(),:date)) AND type_event='sub'\r\n"

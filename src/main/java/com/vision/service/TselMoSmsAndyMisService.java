@@ -79,7 +79,7 @@ public class TselMoSmsAndyMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("Bublly", "BubllyGames", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
@@ -99,6 +99,8 @@ public class TselMoSmsAndyMisService {
 				"0",
 				"0",
 				"0",
+				"Tsel",
+				"Indonesia",
 				subList);
 		
 		System.out.println(mainService);

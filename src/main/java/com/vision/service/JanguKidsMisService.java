@@ -131,7 +131,7 @@ public class JanguKidsMisService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("JanguKids", "JanguKids", "1",
 				minusOneDay, String.valueOf(dailySubCount+weeklySubCount+monthlySubCount), String.valueOf(dailyRenCount+weeklyRenCount),
 				String.valueOf(dailySubRevenue+weeklySubRevenue+monthlySubRevenue),String.valueOf(dailyRenRevenue+weeklyRenRevenue+weeklyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,unsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
@@ -151,6 +151,8 @@ public class JanguKidsMisService {
 				"0",
 				"0",
 				"0",
+				"MTN",
+				"Nigeria",
 				subList);
 		
 		System.out.println(mainService);

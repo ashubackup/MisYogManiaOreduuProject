@@ -107,19 +107,11 @@ public class TrueMoveService {
 		SubServiceRequest subService = service.setDailySubServiceRequest("TrueMove", "gameoffy", "1",
 				minusOneDay, String.valueOf(dailySubCount), String.valueOf(dailyRenCount),
 				String.valueOf(dailySubRevenue),String.valueOf(dailyRenRevenue),
-				String.valueOf(totalRevenue), packList);
+				String.valueOf(totalRevenue),totalBaseCount,totalActiveCount,dailyUnsubCount, packList);
 		
 		List<SubServiceRequest> subList = new ArrayList<>();
 		subList.add(subService);		
 		
-		
-//		public static MainServiceRequest setMainServiceInfo
-//		(String service,String misDate,String totalBase, String totalActiveBase,
-//		String subscriptions,String renewals,
-//		String unsubscriptions,String subscriptionRevenue,String renewalsRevenue,
-//		String totalRevenue, String usdRevenue, String callbackcount,
-//		String SubFailed, String revenueShare, String fame,
-//		List<SubServiceRequest> subService )
 		
 		// MainServiceRequest
 		MainServiceRequest mainService = service.setMainServiceRequest("TrueMove", minusOneDay, 
@@ -136,6 +128,8 @@ public class TrueMoveService {
 				"0",
 				"0",
 				"0",
+				"",
+				"Thailand",
 				subList);
 		
 		System.out.println(mainService);
